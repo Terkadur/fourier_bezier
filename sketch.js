@@ -36,7 +36,7 @@ function setup() {
     sketcher = createGraphics(0.4 * width, height);
     panel = createGraphics(0.2 * width, height);
 
-    download_button = new Button(0.825 * width, 0.6 * height, 0.15 * width, 0.1 * height, "Download path", color(128), color(96));
+    download_button = new Button(0.825 * width, 0.6 * height, 0.15 * width, 0.1 * height, "WIP", color(128), color(96));
 
     n_sloider = new Sloider(0.825 * width, 0.16 * height, 0.15 * width, 0.01 * width, 0.05 * height, 5, color(128), color(96));
     alph_sloider = new Sloider(0.825 * width, 0.32 * height, 0.15 * width, 0.01 * width, 0.05 * height, 50, color(128), color(96));
@@ -78,10 +78,10 @@ function draw() {
         fill(255);
         text("Instructions:", 0.2 * width, 0.16 * height);
         textSize((7 / 640) * width);
-        text("1. Draw your image on the Bezier pad using your mouse. Use ctrl\nand click to create a new vertex. Use shift and click to\nselect two consecutive vertices to add anchors between the\nvertices. Click and drag to move vertices and anchors. Use\nclick and hold and backspace to delete a vertex or anchor.", 0.2 * width, 0.26 * height);
-        text("2. Adjust the Number of epicycles slider to set the number\nof circles desired to approximate your drawing. Higher\nvalues correspond to higher accuracy while lower values\n correspond to more abstractness.", 0.2 * width, 0.44 * height);
-        text("3. You may adjust the Epicycle opacity slider to change\nthe visibility of the circles, and the Speed slider to change\nthe speed of these circles.", 0.2 * width, 0.58 * height);
-        text("4. To save your drawing for later use, press the\nDownload path button.", 0.2 * width, 0.68 * height);
+        text("1. Draw your image on the Bezier pad using your mouse. Use ctrl\nand click to create a new vertex. Use shift and click to\nselect two consecutive vertices, then shift and click\nagain to add anchors between the vertices. Click and drag to\nmove vertices and anchors. Use click and hold and\nbackspace to delete a vertex or anchor. Make sure the\nlast point overlaps with the first.", 0.2 * width, 0.30 * height);
+        text("2. Adjust the Number of epicycles slider to set the number\nof circles desired to approximate your drawing. Higher\nvalues correspond to higher accuracy while lower values\n correspond to more abstractness.", 0.2 * width, 0.51 * height);
+        text("3. You may adjust the Epicycle opacity slider to change\nthe visibility of the circles, and the Speed slider to change\nthe speed of these circles.", 0.2 * width, 0.65 * height);
+        text("4. To save your drawing for later use, press the\nDownload path button.", 0.2 * width, 0.75 * height);
     }
 
     download_button.show();
@@ -390,7 +390,7 @@ function mousePressed() {
 
 function mouseReleased() {
     if (download_button.state) {
-        saveJSON(path, "path");
+        saveJSON(c_n, "path");
     }
 
     if ((n_sloider.state || (mouseX > 0.4 * width && mouseX < 0.8 * width && mouseY > 0 && mouseY < height)) && busiers.length > 0) {
