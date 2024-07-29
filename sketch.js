@@ -37,7 +37,7 @@ function trace(path) {
 }
 
 function setup() {
-    print("Version 1.1");
+    print("Version 1.2");
     let width1 = windowWidth;
     let width2 = (windowHeight - 4) / 0.4;
     createCanvas(min(width1, width2), 0.4 * min(width1, width2));
@@ -139,6 +139,7 @@ function keyPressed() {
         sketcher.background(0);
         if (tracing) {
             sketcher.image(tracing, 0, 0, sketcher.width, sketcher.height);
+            sketcher.background(0, trace_darken);
         }
         sketcher.stroke(255);
         sketcher.strokeWeight(1);
@@ -203,6 +204,7 @@ function mouseDragged() {
         sketcher.background(0);
         if (tracing) {
             sketcher.image(tracing, 0, 0, sketcher.width, sketcher.height);
+            sketcher.background(0, trace_darken);
         }
         sketcher.stroke(255);
         sketcher.strokeWeight(1);
@@ -351,6 +353,7 @@ function mousePressed() {
         sketcher.background(0);
         if (tracing) {
             sketcher.image(tracing, 0, 0, sketcher.width, sketcher.height);
+            sketcher.background(0, trace_darken);
         }
         sketcher.stroke(255);
         sketcher.strokeWeight(1);
