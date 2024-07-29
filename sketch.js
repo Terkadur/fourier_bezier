@@ -26,6 +26,7 @@ let selected_busier = -1;
 let lines = 100;
 
 let tracing = false;
+let trace_darken = 0;
 
 function trace(path) {
     if (path.length == 0) {
@@ -33,58 +34,10 @@ function trace(path) {
     } else {
         tracing = loadImage(path);
     }
-
-    sketcher.background(0);
-    if (tracing) {
-        sketcher.image(tracing, 0, 0, sketcher.width, sketcher.height);
-    }
-    sketcher.stroke(255);
-    sketcher.strokeWeight(1);
-    for (let i = 0; i < busiers.length; i++) {
-        let prev_x = map(busiers[i].anchors[0].x, -1, 1, 0, 0.4 * width);
-        let prev_y = map(busiers[i].anchors[0].y, 1, -1, 0, height);
-        for (let prop = 0; prop <= 1; prop += 1 / lines) {
-            let new_point = busiers[i].eval(prop);
-            let new_x = map(new_point.x, -1, 1, 0, 0.4 * width);
-            let new_y = map(new_point.y, 1, -1, 0, height);
-            sketcher.line(prev_x, prev_y, new_x, new_y);
-            prev_x = new_x;
-            prev_y = new_y;
-        }
-    }
-
-    sketcher.noStroke();
-    sketcher.fill(255);
-    for (let i = 0; i < points.length; i++) {
-        let point_screen_x = map(points[i].x, -1, 1, 0, 0.4 * width);
-        let point_screen_y = map(points[i].y, 1, -1, 0, height);
-        sketcher.ellipse(point_screen_x, point_screen_y, 8);
-
-        if (selected_points.includes(i)) {
-            sketcher.fill(0);
-            sketcher.ellipse(point_screen_x, point_screen_y, 4);
-            sketcher.fill(255);
-        }
-    }
-
-    if (selected_busier != -1) {
-        let anchors = busiers[selected_busier].anchors.slice(1, busiers[selected_busier].anchors.length - 1);
-        for (let i = 0; i < anchors.length; i++) {
-            let point_screen_x = map(anchors[i].x, -1, 1, 0, 0.4 * width);
-            let point_screen_y = map(anchors[i].y, 1, -1, 0, height);
-
-            sketcher.fill(255);
-            sketcher.ellipse(point_screen_x, point_screen_y, 8);
-            sketcher.fill(0);
-            sketcher.ellipse(point_screen_x, point_screen_y, 6);
-            sketcher.fill(255);
-            sketcher.ellipse(point_screen_x, point_screen_y, 4);
-        }
-    }
 }
 
 function setup() {
-    print("Version 1.0");
+    print("Version 1.1");
     let width1 = windowWidth;
     let width2 = (windowHeight - 4) / 0.4;
     createCanvas(min(width1, width2), 0.4 * min(width1, width2));
@@ -106,6 +59,7 @@ function setup() {
     sketcher.background(0);
     if (tracing) {
         sketcher.image(tracing, 0, 0, sketcher.width, sketcher.height);
+        sketcher.background(0, trace_darken);
     }
     panel.background(0);
     textAlign(CENTER, CENTER);
