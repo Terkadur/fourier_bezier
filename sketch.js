@@ -37,7 +37,6 @@ function trace(path) {
 }
 
 function setup() {
-    print("Version 1.2");
     let width1 = windowWidth;
     let width2 = (windowHeight - 4) / 0.4;
     createCanvas(min(width1, width2), 0.4 * min(width1, width2));
